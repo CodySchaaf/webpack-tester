@@ -1,1 +1,3 @@
-console.log("Hello World from your main file!");
+import {ComponentA} from "./packages/index";
+
+console.log(ComponentA);

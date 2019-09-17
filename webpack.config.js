@@ -14,6 +14,7 @@ const webpack = require('webpack');
  *
  */
 
+const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 /*
@@ -34,7 +35,10 @@ module.exports = {
 		path: path.resolve(__dirname, 'dist')
 	},
 
-	plugins: [new webpack.ProgressPlugin(), new HtmlWebpackPlugin()],
+	plugins: [new webpack.ProgressPlugin(), new HtmlWebpackPlugin(), new CircularDependencyPlugin({
+		exclude: /a\.js|node_modules/, // exclude node_modules
+		failOnError: false, // show a warning when there is a circular dependency
+	}),],
 
 	module: {
 		rules: [
